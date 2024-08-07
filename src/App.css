@@ -1,0 +1,69 @@
+.search-input {
+  border-radius: 20px;
+  border: 2px solid rgb(94, 94, 255);
+  padding: 5px 15px 5px 15px;
+  background-color: white;
+  color: rgb(94, 94, 255);
+  height: 45px;
+  width: 260px;
+}
+
+.search-btn {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 2px solid rgb(94, 94, 255);
+  background-color: rgb(94, 94, 255);
+  color: white;
+  height: 45px;
+  width: 45px;
+}
+
+.search-btn:hover {
+  background-color: rgb(0, 0, 223);
+  border: 2px solid rgb(0, 0, 223);
+  color: white;
+}
+
+.btn-pd-search {
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(94, 94, 255);
+  color: white;
+  padding: 5px 15px;
+}
+
+.btn-pd-search:hover {
+  background-color: rgb(0, 0, 223);
+  color: white;
+}
+
+.truncate {
+  width: 100px;
+  white-space: nowrap;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.my-masonry-grid {
+  display: flex;
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 15px;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 425px) {
+  .search-input {
+    width: 200px;
+    margin: 0px 0px 0px 30px;
+  }
+}
