@@ -68,7 +68,7 @@ The `PhotoGallery` component is the main component that houses the `Photo` compo
 
 ## Live Demo
 
-Check out the live demo [here](https://stopwatch-app-phi.vercel.app/).
+Check out the live demo [here](https://photo-gallery-navy-five.vercel.app/).
 
 ## Key Concepts
 
@@ -86,7 +86,7 @@ This project is licensed under the MIT License.
 
 ## Acknowledgements
 
-- [Unsplash] (https://unsplash.com/) for providing the API and beautiful images.
+- [Unsplash](https://unsplash.com/) for providing the API and beautiful images.
 - [Codevixens](https://codevixens.org/) for organizing the challenge.
 - Chinaza Igboanugo, Lois Bassey, and Oyinkansola Shoroye for their contributions and guidance.
 
