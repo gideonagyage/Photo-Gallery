@@ -24,6 +24,17 @@
   color: white;
 }
 
+.btn-close-pop{
+  background-color: rgb(225, 7, 7);
+  border: none;
+  padding: 6px 14px;
+  color: white;
+}
+
+.btn-close-pop:hover{
+  background-color: rgb(255, 64, 64);
+}
+
 .btn-pd-search {
   border-radius: 20px;
   border: none;
@@ -56,7 +67,6 @@
   padding-left: 15px;
 }
 
-/* Style your items */
 .my-masonry-grid_column > div {
   margin-bottom: 30px;
 }

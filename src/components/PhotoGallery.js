@@ -5,6 +5,8 @@ import Photo from "./Photo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Masonry from "react-masonry-css";
+import Modal from "react-bootstrap/Modal";
+
 
 function PhotoGallery() {
   const [photos, setPhotos] = useState([]);
@@ -13,6 +15,7 @@ function PhotoGallery() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [showModal, setShowModal] = useState(false);
 
   const api_Key = process.env.REACT_APP_KEY;
 
@@ -20,7 +23,7 @@ function PhotoGallery() {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?client_id=${api_Key}&query=${query}&page=${page}&per_page=22`
+        `https://api.unsplash.com/search/photos?client_id=${api_Key}&query=${query}&page=${page}&per_page=20`
       );
 
       if (!response.ok) {
@@ -29,7 +32,7 @@ function PhotoGallery() {
 
       const data = await response.json();
       setPhotos(data.results);
-      setTotalPages(Math.ceil(data.total / 22));
+      setTotalPages(Math.ceil(data.total / 20));
     } catch (error) {
       setError(error);
     } finally {
@@ -42,13 +45,22 @@ function PhotoGallery() {
   }, []);
 
   const handleSearch = async () => {
-    setCurrentPage(1);
-    fetchPhotos(searchTerm, 1);
+    if (searchTerm.trim() === "") {
+      // Show the modal if the search field is empty
+      setShowModal(true);
+    } else {
+      setCurrentPage(1);
+      fetchPhotos(searchTerm, 1);
+    }
   };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    fetchPhotos(searchTerm, page);
+    if (searchTerm.length < 1) {
+      fetchPhotos("Code", page);
+    } else {
+      fetchPhotos(searchTerm, page);
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -63,6 +75,8 @@ function PhotoGallery() {
     fetchPhotos(query, 1);
     setSearchTerm(query);
   };
+  
+  const handleCloseModal = () => setShowModal(false);
 
   if (isLoading) {
     return (
@@ -70,10 +84,13 @@ function PhotoGallery() {
         <Spinner animation="border" size="6x" />
       </div>
     );
-  } else if (error) {
+  }
+  if (error) {
     return (
-      <div>
-        <p>Error: {error.message}</p>
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p className="text-danger fw-bold fs-3">
+          An error occured, please refresh and try again.
+        </p>
       </div>
     );
   }
@@ -204,6 +221,23 @@ function PhotoGallery() {
           </li>
         </ul>
       </nav>
+
+      {/* Modal for Empty Search */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Body className="text-black text-center fs-4 fw-semibold pt-3">
+          Search field cannot be empty.
+        </Modal.Body>
+
+        <div className="text-center">
+          <button
+            variant="danger"
+            className="rounded-4 fw-bold fs-5 px-3 mb-3 btn-close-pop"
+            onClick={handleCloseModal}
+          >
+            Close
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
